@@ -27,7 +27,9 @@ ancestry.forEach(function(person) {
 });
 
 for(var prop in obj) {
-  console.log(prop + ': ' + average(obj[prop]));
+  if (obj.hasOwnProperty(prop)) {
+    console.log(prop + ': ' + average(obj[prop]));
+  }
 }
 
 // → 16: 43.5
