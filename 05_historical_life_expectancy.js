@@ -9,12 +9,26 @@ A person is assigned to a century by taking their year of death, dividing it by 
 as in Math.ceil(person.died / 100).
 */
 
+const ancestryfile = require('./05_dataset.js');
+var ancestry = JSON.parse(ancestryfile);
+
 function average(array) {
   function plus(a, b) { return a + b; }
   return array.reduce(plus) / array.length;
 }
 
+var obj = {};
+ancestry.forEach(function(person) {
+  var century = Math.ceil(person.died / 100);
+  if (century in obj === false) {
+    obj[century] = [];
+  }
+  obj[century].push(person.died - person.born);
+});
 
+for(var prop in obj) {
+  console.log(prop + ': ' + average(obj[prop]));
+}
 
 // → 16: 43.5
 //   17: 51.2
