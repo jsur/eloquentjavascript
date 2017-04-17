@@ -1,4 +1,4 @@
-/*A vector type
+/* A vector type
 
 Write a constructor Vector that represents a vector in two-dimensional space.
 It takes x and y parameters (numbers), which it should save to properties of the same name.
@@ -16,20 +16,20 @@ function Vector(x, y) {
   this.y = y;
 }
 
-Vector.prototype.plus = function(vector) {
-  var a = this.x + vector.x;
-  var b = this.y + vector.y;
+Vector.prototype.plus = function (vector) {
+  const a = this.x + vector.x;
+  const b = this.y + vector.y;
   return new Vector(a, b);
 };
 
-Vector.prototype.minus = function(vector) {
-  var a = this.x - vector.x;
-  var b = this.y - vector.y;
+Vector.prototype.minus = function (vector) {
+  const a = this.x - vector.x;
+  const b = this.y - vector.y;
   return new Vector(a, b);
 };
 
-Object.defineProperty(Vector.prototype, "length", {
-  get: function() { return Math.sqrt(Math.pow(this.x,2) + Math.pow(this.y,2)); }
+Object.defineProperty(Vector.prototype, 'length', {
+  get: function () { return Math.sqrt(Math.pow(this.x, 2) + Math.pow(this.y, 2)); },
 });
 
 console.log(new Vector(1, 2).plus(new Vector(2, 3)));
