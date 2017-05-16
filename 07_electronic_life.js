@@ -113,13 +113,6 @@ function World(map, legend) {
   });
 }
 
-function charFromElement(element) {
-  if (element === null) {
-    return ' ';
-  }
-  return element.originChar;
-}
-
 World.prototype.toString = function () {
   let output = '';
   for (let y = 0; y < this.grid.height; y++) {
@@ -161,6 +154,15 @@ World.prototype.checkDestination = function (action, vector) {
     }
   }
 };
+
+function charFromElement(element) {
+  if (element === null) {
+    return ' ';
+  }
+  return element.originChar;
+}
+
+function Wall() {}
 
 /* View object */
 
@@ -214,8 +216,6 @@ WallFollower.prototype.act = function (view) {
   }
   return { type: 'move', direction: this.dir };
 };
-
-function Wall() {}
 
 /* Life like world with plants */
 
