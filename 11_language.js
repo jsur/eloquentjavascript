@@ -18,7 +18,7 @@ topEnv["print"] = function(value) {
   return value;
 };
 
-// Support for arrays
+// Support for arrays, 1st exercise
 
 // Constructs an array containing the argument values
 topEnv["array"] = function(args) {
@@ -56,9 +56,8 @@ function parseExpression(program) {
 }
 
 function skipSpace(string) {
-  var first = string.search(/\S/);
-  if (first == -1) return "";
-  return string.slice(first);
+  var skippable = string.match(/^(\s|#.*)*/);
+  return string.slice(skippable[0].length);
 }
 
 function parseApply(expr, program) {
@@ -105,8 +104,7 @@ function evaluate(expr, env) {
     case "apply":
       if (expr.operator.type == "word" &&
           expr.operator.name in specialForms)
-        return specialForms[expr.operator.name](expr.args,
-                                                env);
+        return specialForms[expr.operator.name](expr.args, env);
       var op = evaluate(expr.operator, env);
       if (typeof op != "function")
         throw new TypeError("Applying a non-function.");
@@ -177,6 +175,10 @@ specialForms["fun"] = function(args, env) {
   };
 };
 
+specialForms["set"] = function(args, env) {
+  
+};
+
 // var prog = parse("if(true, false, true)");
 // console.log(evaluate(prog, topEnv));
 // → false
@@ -211,7 +213,7 @@ run("do(define(pow, fun(base, exp,",
     "   print(pow(2, 10)))");
 // → 1024
 */
-
+/*
 run("do(define(sum, fun(array,",
     "     do(define(i, 0),",
     "        define(sum, 0),",
@@ -221,3 +223,13 @@ run("do(define(sum, fun(array,",
     "        sum))),",
     "   print(sum(array(1, 2, 3))))");
 // → 6
+*/
+/*
+console.log(parse("# hello\nx"));
+// → {type: "word", name: "x"}
+
+console.log(parse("a # one\n   # two\n()"));
+// → {type: "apply",
+//    operator: {type: "word", name: "a"},
+//    args: []}
+*/
